@@ -78,9 +78,6 @@ module.exports = {
   appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
   swSrc: resolveModule(resolveApp, 'src/service-worker'),
   publicUrlOrPath,
-  // CUSTOM ENTRIES
-  appPackages: resolveApp('packages'),
-  appUikit: resolveApp('node_modules/@gd-uikit'),
 };
 
 // @remove-on-eject-begin
@@ -106,9 +103,6 @@ module.exports = {
   appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
   swSrc: resolveModule(resolveApp, 'src/service-worker'),
   publicUrlOrPath,
-  // CUSTOM ENTRIES
-  appPackages: resolveApp('packages'),
-  appUikit: resolveApp('node_modules/@gd-uikit'),
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
