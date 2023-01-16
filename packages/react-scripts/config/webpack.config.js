@@ -128,35 +128,15 @@ module.exports = function (webpackEnv) {
 
   const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
-  function insert2TemplateNode(element) {
-    const styleTargetId = 'remote_entry_style_template_node';
-    const styleTarget = document.getElementById(styleTargetId);
-
-    if (styleTarget) {
-      element.media = 'none';
-      styleTarget.appendChild(element);
-    } else {
-      const styleTarget = document.createElement('template');
-      element.media = 'none';
-      styleTarget.id = styleTargetId;
-      styleTarget.appendChild(element);
-      document.head.appendChild(styleTarget);
-    }
-  }
-
   // common function to get style loaders
   const getStyleLoaders = (
     cssOptions,
-    isRemoteEntry = false,
     preProcessor,
     preProcessorOptions = {}
   ) => {
     const loaders = [
       isEnvDevelopment && {
         loader: require.resolve('style-loader'),
-        options: {
-          insert: !isRemoteEntry ? 'head' : insert2TemplateNode,
-        },
       },
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
@@ -244,8 +224,7 @@ module.exports = function (webpackEnv) {
   ) =>
     [
       // Handle node_modules packages that contain sourcemaps
-      shouldUseSourceMap &&
-        !isRemoteEntry && {
+      shouldUseSourceMap  && {
           enforce: 'pre',
           exclude: [/@babel(?:\/|\\{1,2})runtime/, /node_modules/],
           test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -492,7 +471,6 @@ module.exports = function (webpackEnv) {
                 importLoaders: 3,
                 sourceMap: false,
               },
-              isRemoteEntry,
               'less-loader',
               {
                 lessOptions: {
@@ -513,7 +491,6 @@ module.exports = function (webpackEnv) {
                   mode: 'icss',
                 },
               },
-              isRemoteEntry,
               'sass-loader',
               {
                 implementation: require('sass'),
@@ -541,7 +518,6 @@ module.exports = function (webpackEnv) {
                   getLocalIdent: getCSSModuleLocalIdent,
                 },
               },
-              isRemoteEntry,
               'sass-loader',
               {
                 implementation: require('sass'),
@@ -644,11 +620,6 @@ module.exports = function (webpackEnv) {
           filename: 'gd-frontend/css/[name].[contenthash:8].css',
           chunkFilename: 'gd-frontend/css/[name].[contenthash:8].chunk.css',
           ignoreOrder: true,
-          ...(isRemoteEntry
-            ? {
-                insert: insert2TemplateNode,
-              }
-            : {}),
         }),
       // Moment.js is an extremely popular library that bundles large locale files
       // by default due to how Webpack interprets its code. This is a practical
