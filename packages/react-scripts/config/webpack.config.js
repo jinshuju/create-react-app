@@ -741,6 +741,7 @@ module.exports = function (webpackEnv) {
           project: process.env.REACT_APP_SENTRY_PROJECT,
           // webpack specific configuration
           include: 'build',
+          configFile: '.sentryclirc',
           ignoreFile: '.sentrycliignore',
           ignore: ['node_modules', 'webpack.config.js', 'assets'],
           errorHandler: err => {
