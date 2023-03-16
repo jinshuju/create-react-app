@@ -38,6 +38,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
+const modifyVars = require(`${paths.appUikit}/uikit/lib/utils/styleModifyVars`)
 const webpackOverrideConfig = require(path.resolve(
   paths.appPath,
   'webpack.override'
@@ -473,6 +474,7 @@ module.exports = function (webpackEnv) {
               'less-loader',
               {
                 lessOptions: {
+                  modifyVars,
                   javascriptEnabled: true,
                 },
               }
