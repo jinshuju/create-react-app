@@ -82,6 +82,7 @@ module.exports = {
   appPackages: resolveApp('packages'),
   uikitX: resolveApp('../../packages/uikit-x'),
   appUikit: resolveApp('node_modules/@gd-uikit'),
+  mario: resolveApp('node_modules/@mario'),
 };
 
 // @remove-on-eject-begin
@@ -111,6 +112,7 @@ module.exports = {
   appPackages: resolveApp('packages'),
   uikitX: resolveApp('../../packages/uikit-x'),
   appUikit: resolveApp('node_modules/@gd-uikit'),
+  mario: resolveApp('node_modules/@mario'),
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
