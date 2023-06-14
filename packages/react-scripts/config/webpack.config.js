@@ -227,6 +227,7 @@ module.exports = function (webpackEnv) {
       shouldUseSourceMap && {
         enforce: 'pre',
         exclude: [/@babel(?:\/|\\{1,2})runtime/, /node_modules/],
+        include: [/node_modules\/\.pnpm\/@mario/, /node_modules\/@mario/],
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         loader: require.resolve('source-map-loader'),
       },
@@ -314,7 +315,7 @@ module.exports = function (webpackEnv) {
           // The preset includes JSX, Flow, TypeScript, and some ESnext features.
           {
             test: /\.(js|mjs|jsx|ts|tsx)$/,
-            include: [paths.appSrc, paths.appPackages, paths.mario, paths.uikitX],
+            include: [paths.appSrc, paths.appPackages, paths.uikitX, /node_modules\/\.pnpm\/@mario/, /node_modules\/@mario/],
             loader: require.resolve('babel-loader'),
             options: {
               customize: require.resolve(
@@ -938,7 +939,7 @@ module.exports = function (webpackEnv) {
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(
-          [paths.appSrc, paths.appPackages, paths.mario],
+          [paths.appSrc, paths.appPackages],
           [
             paths.appPackageJson,
             reactRefreshRuntimeEntry,
