@@ -891,7 +891,7 @@ module.exports = function (webpackEnv) {
             minChunks: 2,
             name: 'styles',
             type: 'css/mini-extract',
-            chunks: 'all',
+            chunks: 'async',
             enforce: true,
           },
           localesEN: {
