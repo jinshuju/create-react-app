@@ -38,7 +38,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
-const modifyVars = require(`${paths.appUikit}/uikit/lib/utils/styleModifyVars`)
 const webpackOverrideConfig = require(path.resolve(
   paths.appPath,
   'webpack.override'
@@ -315,7 +314,13 @@ module.exports = function (webpackEnv) {
           // The preset includes JSX, Flow, TypeScript, and some ESnext features.
           {
             test: /\.(js|mjs|jsx|ts|tsx)$/,
-            include: [paths.appSrc, paths.appPackages, paths.uikitX, /node_modules\/\.pnpm\/@mario/, /node_modules\/@mario/],
+            include: [
+              paths.appSrc,
+              paths.appPackages,
+              paths.uikitX,
+              /node_modules\/\.pnpm\/@mario/,
+              /node_modules\/@mario/,
+            ],
             loader: require.resolve('babel-loader'),
             options: {
               customize: require.resolve(
@@ -475,7 +480,6 @@ module.exports = function (webpackEnv) {
               'less-loader',
               {
                 lessOptions: {
-                  modifyVars,
                   javascriptEnabled: true,
                 },
               }
@@ -882,6 +886,13 @@ module.exports = function (webpackEnv) {
             minChunks: 2,
             priority: -20,
             reuseExistingChunk: true,
+          },
+          styles: {
+            minChunks: 2,
+            name: 'styles',
+            type: 'css/mini-extract',
+            chunks: 'all',
+            enforce: true,
           },
           localesEN: {
             test: /[\\/]locales[\\/](en)[\\/]/,
