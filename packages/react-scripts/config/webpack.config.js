@@ -887,15 +887,6 @@ module.exports = function (webpackEnv) {
             priority: -20,
             reuseExistingChunk: true,
           },
-          styles: {
-            minChunks: 2,
-            name: 'styles',
-            type: 'css/mini-extract',
-            chunks: (chunk) => {
-              return Array.from(chunk.runtime).includes('published');
-            },
-            enforce: true,
-          },
           localesEN: {
             test: /[\\/]locales[\\/](en)[\\/]/,
             name: 'localesEN',
