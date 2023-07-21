@@ -818,7 +818,8 @@ module.exports = function (webpackEnv) {
     },
     optimization: {
       moduleIds: 'named',
-      minimize: isEnvProduction,
+      innerGraph: false,
+      minimize: false,
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
