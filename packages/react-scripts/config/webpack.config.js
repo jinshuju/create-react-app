@@ -42,7 +42,7 @@ const webpackOverrideConfig = require(path.resolve(
   paths.appPath,
   'webpack.override'
 ));
-const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
+// const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin');
 
 // @remove-on-eject-begin
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
@@ -749,7 +749,7 @@ module.exports = function (webpackEnv) {
             console.log('Sentry CLI Plugin: ' + err.message);
           },
         }),
-      new RetryChunkLoadPlugin({ maxRetries: 3 }),
+      // new RetryChunkLoadPlugin({ maxRetries: 3 }),
     ].filter(Boolean);
 
   const config = {
