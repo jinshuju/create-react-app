@@ -817,6 +817,7 @@ module.exports = function (webpackEnv) {
       level: 'none',
     },
     optimization: {
+      moduleIds: 'named',
       minimize: isEnvProduction,
       minimizer: [
         // This is only used in production mode
